@@ -5,5 +5,5 @@ dist/
 .DS_Store
 
 # Dữ liệu local: DB + file đã upload. Mỗi người một bản, không commit.
+# Không cần giữ .gitkeep — server tự tạo thư mục này lúc khởi động.
 data/
-!data/.gitkeep

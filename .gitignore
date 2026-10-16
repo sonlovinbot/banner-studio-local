@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+
+# Dữ liệu local: DB + file đã upload. Mỗi người một bản, không commit.
+data/
+!data/.gitkeep

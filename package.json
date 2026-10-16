@@ -1,0 +1,35 @@
+{
+  "name": "banner-studio-local",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "server": "node server/index.mjs",
+    "ui": "vite",
+    "build": "vite build",
+    "start": "npm run build && node server/index.mjs",
+    "lint": "tsc --noEmit",
+    "test": "node tests/run.mjs",
+    "mcp": "node mcp/server.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^1.31.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@supabase/supabase-js": "^2.108.2",
+    "lucide-react": "^0.556.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0"
+  }
+}

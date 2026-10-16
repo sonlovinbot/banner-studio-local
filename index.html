@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              // Semantic tokens backed by CSS variables (see <style> below)
+              canvas: 'var(--bg-canvas)',
+              surface: 'var(--bg-surface)',
+              raised: 'var(--bg-raised)',
+              'raised-2': 'var(--bg-raised-2)',
+              fg: 'var(--fg-default)',
+              muted: 'var(--fg-muted)',
+              subtle: 'var(--fg-subtle)',
+              line: 'var(--border-line)',
+              'line-strong': 'var(--border-strong)',
+              // Brand
+              brand: {
+                DEFAULT: '#F67D1C',
+                light: '#FFA85C',
+                dark: '#D9650A',
+                50: '#FFF5EC',
+                100: '#FFE3CA',
+              },
+              accent: {
+                blue: '#2563EB',
+                green: '#16A34A',
+                yellow: '#FACC15',
+              },
+              // Legacy palette retained for compat — slowly migrate to tokens
+              gray: {
+                950: '#020617',
+                900: '#0f172a',
+                800: '#1e293b',
+                700: '#334155',
+              }
+            },
+            boxShadow: {
+              'pop': '4px 4px 0 0 rgba(0,0,0,0.85)',
+              'pop-lg': '6px 6px 0 0 rgba(0,0,0,0.85)',
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      /* ========================================================
+         Design tokens — high contrast, soft, minimal palette.
+         Light + Dark BOTH guarantee WCAG AA on fg-on-surface combos.
+         Status colors are semantic tokens (success/warning/danger),
+         never raw emerald/amber/red — so themes can tune both at once.
+      ======================================================== */
+
+      :root, .light {
+        /* Surfaces — neutrals only, no warm tint */
+        --bg-canvas:    #FFFFFF;
+        --bg-surface:   #F8FAFC;   /* slate-50 */
+        --bg-raised:    #F1F5F9;   /* slate-100 */
+        --bg-raised-2:  #E2E8F0;   /* slate-200 */
+
+        /* Foreground */
+        --fg-default:   #0F172A;   /* slate-900 — strong text on white, AA pass */
+        --fg-muted:     #475569;   /* slate-600 */
+        --fg-subtle:    #94A3B8;   /* slate-400 */
+        --fg-inverse:   #FFFFFF;   /* text on dark buttons */
+
+        /* Borders */
+        --border-line:   #E2E8F0;  /* slate-200 */
+        --border-strong: #CBD5E1;  /* slate-300 */
+
+        /* Brand (orange — primary only) */
+        --brand:         #F67D1C;
+        --brand-hover:   #D9650A;
+        --brand-soft:    #FFF5EC;
+        --brand-border:  #FFD2A8;
+        --brand-text:    #D9650A;  /* readable on white */
+
+        /* Status (semantic) */
+        --success-bg:    #ECFDF5;
+        --success-fg:    #047857;  /* emerald-700 — readable on success-bg */
+        --success-border:#A7F3D0;
+        --warning-bg:    #FFFBEB;
+        --warning-fg:    #B45309;  /* amber-700 */
+        --warning-border:#FCD34D;
+        --danger-bg:     #FEF2F2;
+        --danger-fg:     #B91C1C;  /* red-700 */
+        --danger-border: #FCA5A5;
+        --info-bg:       #EFF6FF;
+        --info-fg:       #1D4ED8;  /* blue-700 */
+        --info-border:   #BFDBFE;
+
+        --scroll-track:  #F1F5F9;
+        --scroll-thumb:  #CBD5E1;
+        --scroll-thumb-hover: #94A3B8;
+      }
+
+      .dark {
+        --bg-canvas:    #0B1220;
+        --bg-surface:   #111A2E;
+        --bg-raised:    #1A2541;
+        --bg-raised-2:  #243154;
+
+        --fg-default:   #F1F5F9;   /* slate-100 — readable on canvas */
+        --fg-muted:     #94A3B8;   /* slate-400 */
+        --fg-subtle:    #64748B;   /* slate-500 */
+        --fg-inverse:   #0F172A;
+
+        --border-line:   #1F2A40;
+        --border-strong: #2C3A56;
+
+        --brand:         #F67D1C;
+        --brand-hover:   #FFA85C;
+        --brand-soft:    rgba(246, 125, 28, 0.12);
+        --brand-border:  rgba(246, 125, 28, 0.40);
+        --brand-text:    #FFA85C;  /* readable on dark */
+
+        --success-bg:    rgba(16, 185, 129, 0.10);
+        --success-fg:    #6EE7B7;  /* emerald-300 */
+        --success-border:rgba(16, 185, 129, 0.30);
+        --warning-bg:    rgba(245, 158, 11, 0.10);
+        --warning-fg:    #FCD34D;  /* amber-300 */
+        --warning-border:rgba(245, 158, 11, 0.30);
+        --danger-bg:     rgba(239, 68, 68, 0.10);
+        --danger-fg:     #FCA5A5;  /* red-300 */
+        --danger-border: rgba(239, 68, 68, 0.30);
+        --info-bg:       rgba(59, 130, 246, 0.10);
+        --info-fg:       #93C5FD;  /* blue-300 */
+        --info-border:   rgba(59, 130, 246, 0.30);
+
+        --scroll-track:  #111A2E;
+        --scroll-thumb:  #2C3A56;
+        --scroll-thumb-hover: #475569;
+      }
+
+      html, body {
+        font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        /* Slight bump for readability — most UI text is text-sm/text-xs in Tailwind. */
+        font-size: 15px;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      body { background-color: var(--bg-canvas); color: var(--fg-default); }
+
+      /* Selection — readable in both themes */
+      ::selection { background: var(--brand); color: var(--fg-inverse); }
+
+      /* Reusable semantic component utilities — Tailwind doesn't know
+         our status tokens, so we expose them via custom classes the
+         components reference. Keeps light + dark in sync automatically. */
+      .status-success { color: var(--success-fg); background: var(--success-bg); border-color: var(--success-border); }
+      .status-warning { color: var(--warning-fg); background: var(--warning-bg); border-color: var(--warning-border); }
+      .status-danger  { color: var(--danger-fg);  background: var(--danger-bg);  border-color: var(--danger-border); }
+      .status-info    { color: var(--info-fg);    background: var(--info-bg);    border-color: var(--info-border); }
+      .text-success { color: var(--success-fg); }
+      .text-warning { color: var(--warning-fg); }
+      .text-danger  { color: var(--danger-fg); }
+      .text-info    { color: var(--info-fg); }
+      .bg-success-soft { background: var(--success-bg); }
+      .bg-warning-soft { background: var(--warning-bg); }
+      .bg-danger-soft  { background: var(--danger-bg); }
+      .bg-info-soft    { background: var(--info-bg); }
+      .bg-brand-soft   { background: var(--brand-soft); }
+      .bg-success-fg   { background: var(--success-fg); }
+      .bg-warning-fg   { background: var(--warning-fg); }
+      .bg-danger-fg    { background: var(--danger-fg); }
+      .bg-info-fg      { background: var(--info-fg); }
+      .hover\:bg-danger-fg:hover    { background: var(--danger-fg); }
+      .hover\:bg-success-soft:hover { background: var(--success-bg); }
+      .hover\:bg-warning-soft:hover { background: var(--warning-bg); }
+      .hover\:bg-danger-soft:hover  { background: var(--danger-bg); }
+      .hover\:bg-info-soft:hover    { background: var(--info-bg); }
+      .border-success-fg\/40 { border-color: var(--success-border); }
+      .border-success-fg\/50 { border-color: var(--success-border); }
+      .border-warning-fg\/40 { border-color: var(--warning-border); }
+      .border-warning-fg\/50 { border-color: var(--warning-border); }
+      .border-danger-fg\/40  { border-color: var(--danger-border); }
+      .border-danger-fg\/50  { border-color: var(--danger-border); }
+      .border-info-fg\/40    { border-color: var(--info-border); }
+      .border-info-fg\/50    { border-color: var(--info-border); }
+
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: var(--scroll-track); }
+      ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); }
+    </style>
+</head>
+  <body class="bg-canvas text-fg min-h-screen">
+    <div id="root" class="min-h-screen"></div>
+  <script type="module" src="/src/index.tsx"></script>
+</body>
+</html>
